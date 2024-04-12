@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Formazione.Models.EdizioneCorso>
+
+@{
+    ViewData["Title"] = "Lista Edizioni Corsi";
+    Layout = "_Layout";
+
+}
+
+<h1 class="Titolo">Lista Edizioni Corsi</h1>
+
+<h3 class="Titolo3">
+    Aggiungi una nuova Edizione
+    <a asp-action="Create" id="NuovoProgetto">
+        <i class="fa-regular fa-plus fa-beat fa-xl" style="color: #32CD32"></i>
+    </a>
+</h3>
+
+<style>
+    .Titolo {
+        font-family: serif;
+        text-shadow: 1px 1px black;
+    }
+
+    .table td, .table th {
+        padding: 2px;
+    }
+</style>
+
+<div class="table-conteiner">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark text-black">
+            <tr>
+                <th>
+                    ID Edizione corso
+                </th>
+                <th>
+                    Progetto Formativo ID
+                </th>
+                <th>
+                    Anno di creazione
+                </th>
+                <th>
+                    Numero di edizione
+                </th>
+                <th>
+                    Quantità Moduli
+                </th>
+                <th>
+                    Descrizione
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EdizioneCorsoID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProgettoFormativoID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Anno)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumeroEdizione)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantitàModuli)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descrizione)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.EdizioneCorsoID" class="action-button"><i class="fa-regular fa-pen-to-square" style="color: #0433ff;" title="Modifica"></i></a>
+                        <a asp-action="Details" asp-route-id="@item.EdizioneCorsoID" class="action-button"><i class="fa-regular fa-circle-info" style="color: #96d35f;" title="Dettagli"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.EdizioneCorsoID" class="action-button"><i class="fa-regular fa-trash-can" style="color: #ff2600;" title="Elimina"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,89 @@
+﻿@model Formazione.Models.EdizioneCorso
+
+@{
+    ViewData["Title"] = "Cancellazione Edizione Corso";
+    Layout = "_Layout";
+
+}
+
+<h1>Cancellazione Edizione Corso</h1>
+
+<h3>Questa opzione cancellerà il Docente o Tutor dalla lista! Sei sicuro di voler continuare?</h3>
+<div>
+    <h4>EdizioneCorso</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Anno)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Anno)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NumeroEdizione)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NumeroEdizione)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.QuantitàModuli)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.QuantitàModuli)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Descrizione)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Descrizione)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dataorains)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataorains)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDutenteins)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDutenteins)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dataoraultmod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataoraultmod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDutenteultmod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDutenteultmod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.eliminato)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.eliminato)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDutenteultcanc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDutenteultcanc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dataoraultcanc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataoraultcanc)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="EdizioneCorsoID" />
+        <input type="submit" value="Elimina" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary" style="background-color: blue;">Ritorna alla lista Edizioni</a>
+    </form>
+</div>

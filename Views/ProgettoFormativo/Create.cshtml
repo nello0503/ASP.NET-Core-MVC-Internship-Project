@@ -1,0 +1,80 @@
+﻿@model Formazione.Models.ProgettoFormativo
+
+@{
+    ViewData["Title"] = "Creazione Progetto Formativo";
+    Layout = "_Layout";
+
+}
+
+<h1>Creazione</h1>
+
+<h4>ProgettoFormativo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TipoCorsoID" class="control-label"></label>
+                <select asp-for="TipoCorsoID" class="form-control" asp-items="ViewBag.TipoCorsoID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Codice" class="control-label"></label>
+                <input asp-for="Codice" class="form-control" />
+                <span asp-validation-for="Codice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="titolo" class="control-label"></label>
+                <input asp-for="titolo" class="form-control" />
+                <span asp-validation-for="titolo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="direttore_scientifico" class="control-label"></label>
+                <input asp-for="direttore_scientifico" class="form-control" />
+                <span asp-validation-for="direttore_scientifico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tipologia_evento" class="control-label"></label>
+                <input asp-for="tipologia_evento" class="form-control" />
+                <span asp-validation-for="tipologia_evento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tutor" class="control-label"></label>
+                <input asp-for="tutor" class="form-control" />
+                <span asp-validation-for="tutor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="tutor_aula" class="control-label"></label>
+                <input asp-for="tutor_aula" class="form-control" />
+                <span asp-validation-for="tutor_aula" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ore_edizione" class="control-label"></label>
+                <input asp-for="ore_edizione" class="form-control" />
+                <span asp-validation-for="ore_edizione" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numero_partecipanti" class="control-label"></label>
+                <input asp-for="numero_partecipanti" class="form-control" />
+                <span asp-validation-for="numero_partecipanti" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sede_svolgimento" class="control-label"></label>
+                <input asp-for="sede_svolgimento" class="form-control" />
+                <span asp-validation-for="sede_svolgimento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Salva" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="form-group mt-3">
+<a asp-action="Index" class="btn btn-secondary" style="background-color: red;">Ritorna alla lista dei Progetti Formativi</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

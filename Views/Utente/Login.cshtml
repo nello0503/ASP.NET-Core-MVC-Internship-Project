@@ -1,0 +1,76 @@
+﻿@model Formazione.Models.Utente
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Login - ASL CASERTA</title>
+    <link rel="stylesheet" type="text/css" href="stile.css">
+    <link rel="stylesheet" href="path-to-fontawesome/css/all.min.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-image: url('./Background ASL.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-box {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-control {
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 login-box">
+                @using (Html.BeginForm("Login", "Utente", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.username, new { @class = "form-control", id = "username", placeholder = "Username", required = "required", autofocus = "autofocus" })
+                    </div>
+                    <div class="form-group">
+                        @Html.TextBoxFor(m => m.password, new { @class = "form-control", type = "password", placeholder = "Password", required = "required" })
+                    </div>
+                    <button type="submit">Accedi</button>
+                }
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger">
+                        @TempData["ErrorMessage"]
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</body>
+</html>

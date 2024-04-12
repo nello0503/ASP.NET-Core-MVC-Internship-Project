@@ -1,0 +1,83 @@
+﻿@model Formazione.Models.Modulo
+
+@{
+    ViewData["Title"] = "Eliminazione Modulo";
+    Layout = "_Layout";
+
+}
+
+<h1>Eliminazione Modulo </h1>
+
+<h3>Questa opzione cancellerà il Docente o Tutor dalla lista! Sei sicuro di voler continuare?</h3>
+<div>
+    <h4>Modulo</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.data_inizio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.data_inizio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.totale_ore)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.totale_ore)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dataorains)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataorains)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDutenteins)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDutenteins)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dataoraultmod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataoraultmod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDutenteultmod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDutenteultmod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.eliminato)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.eliminato)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDutenteultcanc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDutenteultcanc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dataoraultcanc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataoraultcanc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Edizione)
+        </dt> 
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Edizione.EdizioneCorsoID)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ModuloID" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index" class="btn btn-secondary" style="background-color: blue;">Ritorna alla lista Modulo</a>
+    </form>
+</div>

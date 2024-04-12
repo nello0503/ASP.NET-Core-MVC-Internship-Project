@@ -1,0 +1,149 @@
+﻿@model IEnumerable<Formazione.Models.Modulo>
+
+@{
+    ViewData["Title"] = "Lista Moduli";
+    Layout = "_Layout";
+
+}
+
+<h1 class="Titolo">Lista Moduli</h1>
+<h3 class="Titolo3">
+    Aggiungi un nuovo Modulo
+    <a asp-action="Create">
+        <i class="fa-regular fa-plus fa-beat fa-xl" style="color: #32CD32"></i>
+    </a>
+</h3>
+
+<style>
+    .Titolo {
+        font-family: serif;
+        text-shadow: 1px 1px black;
+    }
+
+    .table td, .table th {
+        padding: 2px;
+    }
+
+    .container {
+        position: relative;
+        width: 100%;
+    }
+
+    .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown-content {
+        right: 0;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    #Id {
+        text-decoration: none;
+        color: black;
+    }
+
+    .container {
+        position: relative;
+        width: 100%;
+    }
+
+    .float-right {
+        float: right;
+        padding-bottom: 100px;
+    }
+</style>
+
+
+
+<div class="container text-center">
+    <table class="table table-bordered table-striped" id="pagination" style="max-width:100%">
+        <thead class="thead-dark text-black">
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.First().EdizioneCorsoID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().numero)
+
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().data_inizio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().data_fine)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().totale_ore)
+                </th>
+                <th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EdizioneCorsoID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.numero)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.data_inizio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.data_fine)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.totale_ore)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.numero)
+                    </td>
+
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ModuloID" class="action-button"><i class="fa-regular fa-pen-to-square" style="color: #0433ff;" title="Modifica"></i></a>
+                        <a asp-action="Details" asp-route-id="@item.ModuloID" class="action-button"><i class="fa-regular fa-circle-info" style="color: #96d35f;" title="Dettagli"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.ModuloID" class="action-button"><i class="fa-regular fa-trash-can" style="color: #ff2600;" title="Elimina"></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

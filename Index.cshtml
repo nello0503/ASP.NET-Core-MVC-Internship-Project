@@ -1,0 +1,407 @@
+﻿@model IEnumerable<Formazione.Models.ProgettoFormativo>
+
+@using PagedList.Mvc;
+@using PagedList;
+@using X.PagedList.Mvc.Core;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+
+
+@{
+    ViewData["Title"] = "Lista Progetti Formativi";
+    Layout = "_Layout";
+}
+
+
+<h1 class="Titolo">Lista Progetti Formativi</h1>
+
+<p>
+    <a asp-action="Create" id="NuovoProgetto">Nuovo Progetto Formativo</a>
+</p>
+<head>
+
+    <script>// Function to filter rows based on data_inizio
+        function filterByDataInizio() {
+            var currentDate = new Date();
+            $("#myTable tbody tr").each(function () {
+                var dataInizioCell = $(this).find("td:eq(1)").text(); // Assuming "data_inizio" is in the second column (index 1)
+                var dataInizio = new Date(dataInizioCell);
+                if (dataInizio < currentDate) {
+                    $(this).show(); // Show rows where data_inizio is less than the current date
+                } else {
+                    $(this).hide(); // Hide rows where data_inizio is greater than or equal to the current date
+                }
+            });
+        }
+
+        // Function to filter rows based on data_fine
+        function filterByDataFine() {
+            var currentDate = new Date();
+            $("#myTable tbody tr").each(function () {
+                var dataFineCell = $(this).find("td:eq(2)").text(); // Assuming "data_fine" is in the third column (index 2)
+                var dataFine = new Date(dataFineCell);
+                if (dataFine > currentDate) {
+                    $(this).show(); // Show rows where data_fine is greater than the current date
+                } else {
+                    $(this).hide(); // Hide rows where data_fine is less than or equal to the current date
+                }
+            });
+        }</script>
+
+    <script>function myFunction1() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchID");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+
+    <script>function myFunction2() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("Corso");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+
+    <script>function myFunction3() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("Codice");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+
+
+</head>
+
+<style>
+
+    .Titolo {
+        font-family: serif;
+        text-shadow: 1px 1px black;
+    }
+
+    .table td, .table th {
+        padding: 2px;
+    }
+
+
+
+    .action-button {
+        padding: 5px 10px;
+        border: 1px solid #000;
+        border-radius: 10px;
+        text-decoration: none;
+        color: black;
+        margin-right: 5px;
+        display: inline-block;
+        height: 40px;
+        margin-top: 5px;
+        margin-left: 5px;
+        margin-bottom: 10px;
+    }
+
+    #NuovoProgetto {
+        border-block: 30px;
+        text-decoration: none;
+        color: black;
+    }
+
+    .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown-content {
+        right: 0;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+        .dropdown-content a {
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    #Id {
+        text-decoration: none;
+        color: black;
+    }
+
+    .container {
+        position: relative;
+        width: 100%;
+    }
+
+    .float-right {
+        float: right;
+        padding-bottom: 100px;
+    }
+
+    .button {
+        padding: 15px 25px;
+        font-size: 24px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: blue;
+        background-color: #04AA6D;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+        margin-top: 100px;
+    }
+
+        .button:hover {
+            background-color: #3e8e41
+        }
+
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+</style>
+
+<div class="form-group">
+    <label for="fromDate">Data Iniziale:</label>
+    <input type="date" id="fromDate" name="fromDate" class="form-control" />
+</div>
+<div class="form-group">
+    <label for="toDate">Data Finale:</label>
+    <input type="text" id="toDate" name="toDate" class="form-control" />
+</div>
+
+
+
+
+<div class="container">
+    <div class="float-right">
+        <div class="dropdown">
+            <button class="dropbtn blue-button">Filtro</button>
+            <div class="dropdown-content">
+                <a asp-action="Index" asp-route-filter="InCorso">In Corso</a>
+                <a asp-action="Index" asp-route-filter="NonInCorso">Non In Corso</a>
+                <a asp-action="Index" asp-route-filter="SenzaEdizioni">Senza Edizioni</a>
+                <a asp-action="Index" asp-route-filter="Tutti">Tutti</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="table-conteiner">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark text-black">
+            <tr>
+
+                <th>
+                    <a asp-action="Index" asp-route-OrderBy="ID_desc" data-sortable="true" id="Id">ID</a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().TipoCorsoID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Codice)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().titolo)
+                </th>
+                <th>
+                    <a asp-action="Index" asp-route-OrderBy="direttore_scientifico">Direttore Scientifico</a>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().tipologia_evento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().tutor)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().tutor_aula)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().ore_edizione)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().numero_partecipanti)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().sede_svolgimento)
+                </th>
+            </tr>
+
+            <tr>
+                <th>
+                    <input type="text" id="searchID" placeholder="Cerca ID" onkeyup="myFunction1()">
+
+                </th>
+
+                <th>
+                    <input type="text" id="Corso" placeholder="Cerca Tipologia Corso" onkeyup="myFunction2()">
+
+                </th>
+
+                <th>
+                    <input type="text" id="Codice" placeholder="Cerca Codice" onkeyup="myFunction3 ()">
+
+                </th>
+
+                <th>
+                    <input type="text" id="search" placeholder="Cerca Titolo" onkeyup="myFunction()">
+
+                </th>
+
+                <th>
+                    <input type="text" id="search" placeholder="Cerca Direttore Scientifico" onkeyup="myFunction()">
+
+                </th>
+                <th>
+                    <input type="text" id="search" placeholder="Cerca Tipologia Evento" onkeyup="myFunction()">
+
+                </th>
+                <th>
+                    <input type="text" id="search" placeholder="Cerca Tutor" onkeyup="myFunction()">
+
+                </th>
+                <th>
+                    <input type="text" id="search" placeholder="Cerca Tutor Aula" onkeyup="myFunction()">
+
+                </th>
+
+                <th>
+                    <input type="text" id="search" placeholder="Cerca Ore" onkeyup="myFunction()">
+
+                </th>
+
+                <th>
+                    <input type="text" id="search" placeholder="Cerca Numero Partecipanti" onkeyup="myFunction()">
+
+                </th>
+
+                <th>
+                    <input type="text" id="search" placeholder="Cerca Sede Svolgimento" onkeyup="myFunction()">
+
+                </th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProgettoFormativoID)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoCorsoID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Codice)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.titolo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.direttore_scientifico)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tipologia_evento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tutor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tutor_aula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ore_edizione)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.numero_partecipanti)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sede_svolgimento)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ProgettoFormativoID" class="action-button">Modifica</a>
+                        <a asp-action="Details" asp-route-id="@item.ProgettoFormativoID" class="action-button">Dettagli</a>
+                        <a asp-action="Delete" asp-route-id="@item.ProgettoFormativoID" class="action-button">Elimina</a>
+                        <a asp-action="VediEdizioni" asp-route-id="@item.ProgettoFormativoID" class=" action-button">Edizioni</a>
+                        <a asp-action="VediPianificazione" asp-route-id="@item.ProgettoFormativoID" class=" action-button">Pianificazione</a>
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,79 @@
+﻿@model Formazione.Models.DocenteTutor
+
+@{
+    ViewData["Title"] = "Creazione";
+    Layout = "_Layout";
+
+}
+
+<h1>Creazione</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Qualifica" class="control-label"></label>
+                <select asp-for="Qualifica" class="form-control" asp-items="@Html.GetEnumSelectList<Qualifica>()">
+                    <option selected="selected" value="">*****Seleziona***</option>
+                </select>
+                <span asp-validation-for="Qualifica" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cognome" class="control-label"></label>
+                <input asp-for="Cognome" class="form-control" />
+                <span asp-validation-for="Cognome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipologia" class="control-label"></label>
+
+                <select asp-for="Tipologia" class="form-control" asp-items="@Html.GetEnumSelectList<TipologiaDocenteTutor>()">
+                    <option selected="selected" value="">*****Seleziona***</option>
+                </select>
+                <div class="form-group">
+                    <label asp-for="Note" class="control-label"></label>
+                    <input asp-for="Note" class="form-control" />
+                    <span asp-validation-for="Note" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CF" class="control-label"></label>
+                    <input asp-for="CF" class="form-control" />
+                    <span asp-validation-for="CF" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Telefono" class="control-label"></label>
+                    <input asp-for="Telefono" class="form-control" />
+                    <span asp-validation-for="Telefono" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cellulare" class="control-label"></label>
+                    <input asp-for="Cellulare" class="form-control" />
+                    <span asp-validation-for="Cellulare" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="submit" value="Salva" class="btn btn-primary" />
+                </div>
+        </form>
+    </div>
+</div>
+
+<div class="form-group mt-3">
+    <a asp-action="Index" class="btn btn-secondary" style="background-color: red;">Ritorna alla lista dei docenti</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

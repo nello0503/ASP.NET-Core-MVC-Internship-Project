@@ -1,0 +1,66 @@
+﻿@model Formazione.Models.TipoCorso
+
+@{
+    ViewData["Title"] = "Modifica del coso";
+    Layout = "_layout";
+}
+
+<h1>Modifica</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TipoCorsoID" />
+            <div class="form-group">
+                <label asp-for="Codice" class="control-label"></label>
+                <input asp-for="Codice" class="form-control" />
+                <span asp-validation-for="Codice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DescrizioneCodice" class="control-label"></label>
+                <input asp-for="DescrizioneCodice" class="form-control" />
+                <span asp-validation-for="DescrizioneCodice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Durata" class="control-label"></label>
+                <input asp-for="Durata" class="form-control" />
+                <span asp-validation-for="Durata" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sedute" class="control-label"></label>
+                <input asp-for="Sedute" class="form-control" />
+                <span asp-validation-for="Sedute" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Moduli" class="control-label"></label>
+                <input asp-for="Moduli" class="form-control" />
+                <span asp-validation-for="Moduli" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnniValidità" class="control-label"></label>
+                <input asp-for="AnniValidità" class="form-control" />
+                <span asp-validation-for="AnniValidità" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxDiscenti" class="control-label"></label>
+                <input asp-for="MaxDiscenti" class="form-control" />
+                <span asp-validation-for="MaxDiscenti" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group mt-3">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<div class="form-group mt-3">
+    <a asp-action="Index" class="btn btn-secondary" style="background-color: red;">Ritorna alla lista dei Corsi</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

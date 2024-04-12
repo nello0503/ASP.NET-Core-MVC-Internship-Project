@@ -1,0 +1,72 @@
+﻿@model Formazione.Models.Utente
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "_Layout";
+}
+
+<h1>Edit</h1>
+
+<h4>Utente</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="utente_id" />
+            <div class="form-group">
+                <label asp-for="cognome" class="control-label"></label>
+                <input asp-for="cognome" class="form-control" />
+                <span asp-validation-for="cognome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="nome" class="control-label"></label>
+                <input asp-for="nome" class="form-control" />
+                <span asp-validation-for="nome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="username" class="control-label"></label>
+                <input asp-for="username" class="form-control" />
+                <span asp-validation-for="username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="password" class="control-label"></label>
+                <input asp-for="password" class="form-control" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ruolo" class="control-label"></label>
+                <input asp-for="ruolo" class="form-control" />
+                <span asp-validation-for="ruolo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CF" class="control-label"></label>
+                <input asp-for="CF" class="form-control" />
+                <span asp-validation-for="CF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="unitaprodAbilitate" class="control-label"></label>
+                <input asp-for="unitaprodAbilitate" class="form-control" />
+                <span asp-validation-for="unitaprodAbilitate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Salva" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="form-group mt-3">
+<a asp-action="Index" class="btn btn-secondary" style="background-color: red;">Ritorna alla lista degli Utenti</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

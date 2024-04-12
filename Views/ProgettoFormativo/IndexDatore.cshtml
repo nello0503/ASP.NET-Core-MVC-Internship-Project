@@ -1,0 +1,114 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+
+
+@model List<Formazione.Models.ProgettoFormativo>;
+
+<style>
+    .btn-primary{
+        with: 88px;
+        height: 38px;
+    }
+</style>
+
+
+<div class="table-conteiner">
+    <table class="table table-bordered table-striped">
+        <thead class="thead-dark text-black">
+            <tr>
+
+              <th>
+                  ProgettoID
+              </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().TipoCorsoID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().Codice)
+                </th>
+                <th>
+                    Titolo
+                </th>
+                <th>
+                    Direttore Scientifico
+                </th>
+                <th>
+                    Tipologia Evento
+                </th>
+                <th>
+                   Tutor
+                </th>
+                <th>
+                    Tutor aula
+                </th>
+                <th>
+                    Ore
+                </th>
+                <th>
+                    Partecipanti
+                </th>
+                <th>
+                    Sede svolgimento
+                </th>
+                <th>
+                    Azioni
+                </th>
+            </tr>
+        </thead>
+        <tbody id="myTable">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProgettoFormativoID)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoCorsoID)
+                    </td>
+                    <td>
+                        @Html.DisplayNameFor(modelItem => item.Codice)
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.titolo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.direttore_scientifico)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tipologia_evento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tutor)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tutor_aula)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ore_edizione)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.numero_partecipanti)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.sede_svolgimento)
+                    </td>
+                    
+                    
+                    <td>
+                        <a asp-action="VediAssegnazioni" asp-route-id="@item.ProgettoFormativoID" class="btn btn-primary">Assegna</a>
+
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+

@@ -1,0 +1,50 @@
+﻿@model Formazione.Models.Modulo
+
+@{
+    ViewData["Title"] = "Modifica Modulo";
+    Layout = "_Layout";
+
+}
+
+<h1>Modifica</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ModuloID" />
+            <div class="form-group">
+                <label asp-for="EdizioneCorsoID" class="control-label"></label>
+                <select asp-for="EdizioneCorsoID" class="form-control" asp-items="ViewBag.EdizioneCorsoID"></select>
+                <span asp-validation-for="EdizioneCorsoID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="numero" class="control-label"></label>
+                <input asp-for="numero" class="form-control" />
+                <span asp-validation-for="numero" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="data_inizio" class="control-label"></label>
+                <input asp-for="data_inizio" class="form-control" />
+                <span asp-validation-for="data_inizio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="data_fine" class="control-label"></label>
+                <input asp-for="data_fine" class="form-control" />
+                <span asp-validation-for="data_fine" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group mt-3">
+                <input type="submit" value="Salva" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="form-group mt-3">
+    <a asp-action="Index" class="btn btn-secondary" style="background-color: red;">Ritorna alla lista dei Moduli</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

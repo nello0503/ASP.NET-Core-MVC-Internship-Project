@@ -1,0 +1,91 @@
+﻿@model IEnumerable<Formazione.Models.TipoCorso>
+
+@{
+    ViewData["Title"] = "Lista Dei Corsi";
+    Layout = "_layout"; 
+}
+
+<h1 class="Titolo">Lista Dei Corsi</h1>
+<h3 class="Titolo3">
+    Aggiungi un nuovo Corso
+    <a asp-action="Create" id="ListaProgetti">
+        <i class="fa-regular fa-plus fa-beat fa-xl" style="color: #32CD32"></i>
+    </a>
+</h3>
+
+    <style>
+        .Titolo {
+            font-family: serif;
+            text-shadow: 1px 1px black;
+        }
+        .table td, .table th {
+            padding: 2px;
+        }
+
+    </style>
+
+    <div class="container text-center">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark text-black">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Codice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescrizioneCodice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Durata)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sedute)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Moduli)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnniValidità)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxDiscenti)
+            </th>
+      
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescrizioneCodice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Durata)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sedute)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Moduli)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AnniValidità)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxDiscenti)
+            </td>
+     
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TipoCorsoID" class="action-button"><i class="fa-regular fa-pen-to-square" style="color: #0433ff;" title="Modifica"></i></a>
+                <a asp-action="Details" asp-route-id="@item.TipoCorsoID" class="action-button"><i class="fa-regular fa-circle-info" style="color: #96d35f;" title="Dettagli"></i></a>
+                <a asp-action="Delete" asp-route-id="@item.TipoCorsoID" class="action-button"><i class="fa-regular fa-trash-can" style="color: #ff2600;" title="Elimina"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+</div>

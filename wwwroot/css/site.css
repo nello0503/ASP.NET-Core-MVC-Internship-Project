@@ -1,0 +1,83 @@
+    html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    /*background-image: url('../BackGround.png'); */
+    background-size: cover; /* Imposta la dimensione dell'immagine per coprire l'intera pagina */
+    background-attachment: fixed; /* Opzionale: rende l'immagine di sfondo fissa durante lo scorrimento */
+}
+
+/* Style for the dropdown menu */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    
+}
+
+    /* Style for the dropdown items */
+    .dropdown-menu li {
+        padding: 10px;
+    }
+
+/* Show the dropdown when the parent li is hovered */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    
+
+}
+
+dropdown-menu .nav-item:hover {
+    background-color: aquamarine;
+}
+
+.navbar-nav .nav-item:hover {
+    background-color: aquamarine;
+}
+
+.navbar-logo {
+    width: 100px; /* Imposta la larghezza del tuo logo */
+    height: auto; /* L'altezza verrà regolata automaticamente in base alla larghezza */
+    margin-right: 10px; /* Aggiunge spazio a destra del logo */
+}
+s
+#logo {
+    background-image: url('../BackGround.png'); /* Imposta la larghezza del logo */
+    height: auto;
+    backdrop-filter:blur(5px);
+}
+
+/* Stile per la dimensione del font */
+.custom-heading {
+    font-size: 24px; /* Imposta la dimensione del font per il titolo */
+    font-weight: bold; /* Imposta lo stile del font (opzionale) */
+    color: #333; /* Imposta il colore del testo (opzionale) */
+}
+
+
+fieldset {
+    margin: 8px;
+    border: 1px solid silver;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+legend {
+    padding: 2px;
+}
+

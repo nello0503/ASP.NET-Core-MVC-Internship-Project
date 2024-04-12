@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Formazione.Models.Utente>
+
+@{
+    ViewData["Title"] = "Lista Utenti - ASL CASERTA";
+    Layout = "_Layout";
+}
+
+<h1 class="Titolo">Lista Utenti</h1>
+
+<h3 class="Titolo3">
+    Aggiungi un nuovo Utente
+    <a asp-action="Create" id="NuovoUtente">
+        <i class="fa-regular fa-plus fa-beat fa-xl" style="color: #32CD32"></i>
+    </a>
+</h3>
+
+    <style>
+        
+        .Titolo {
+            font-family: serif;
+            text-shadow: 1px 1px black;
+        }
+
+        .table td, .table th {
+            padding: 2px;
+        }
+
+        .table-container {
+            border-radius: 10px; /* Regola il valore del border-radius come preferisci */
+            overflow: hidden; /* Nasconde eventuali angoli arrotondati della tabella al di fuori del contenitore */
+            background-color: rgba(255, 255, 255, 0.8); /* Imposta il colore di sfondo con opacità */
+            padding: 20px; /* Aggiunge spazio interno per migliorare l'aspetto */
+            width: 80%; /* Regola la larghezza del contenitore come preferisci */
+            margin: auto;
+        }
+
+    </style>
+
+    <div class="table-conteiner">
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark text-black">
+                <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cognome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.username)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ruolo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CF)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.unitaprodAbilitate)
+            </th>
+       
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cognome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ruolo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CF)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.unitaprodAbilitate)
+            </td>
+           
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.utente_id" class="action-button"><i class="fa-regular fa-pen-to-square" style="color: #0433ff;" title="Modifica"></i></a>
+                <a asp-action="Details" asp-route-id="@item.utente_id" class="action-button"><i class="fa-regular fa-circle-info" style="color: #96d35f;" title="Dettagli"></i></a>
+                <a asp-action="Delete" asp-route-id="@item.utente_id" class="action-button"><i class="fa-regular fa-trash-can" style="color: #ff2600;" title="Elimina"></i></a>
+
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

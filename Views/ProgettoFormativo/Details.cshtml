@@ -1,0 +1,127 @@
+﻿@model Formazione.Models.ProgettoFormativo
+
+@{
+    ViewData["Title"] = "Dettagli Progetto Formativo";
+    Layout = "_Layout";
+
+}
+
+<h1>Dettagli</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ProgettoFormativoID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ProgettoFormativoID)
+        </dd>
+        <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.TipoCorsoID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipoCorsoID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Codice)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Codice)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.titolo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.titolo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.direttore_scientifico)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.direttore_scientifico)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.tipologia_evento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.tipologia_evento)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.tutor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.tutor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.tutor_aula)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.tutor_aula)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ore_edizione)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ore_edizione)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.numero_partecipanti)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.numero_partecipanti)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.sede_svolgimento)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.sede_svolgimento)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dataorains)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataorains)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDutenteins)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDutenteins)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dataoraultmod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataoraultmod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDutenteultmod)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDutenteultmod)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.eliminato)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.eliminato)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IDutenteultcanc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IDutenteultcanc)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.dataoraultcanc)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.dataoraultcanc)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" class="btn btn-secondary" style="background-color: red;" asp-route-id="@Model?.ProgettoFormativoID">Modifica</a>
+    <a asp-action="Index" class="btn btn-secondary" style="background-color: blue;">Ritorna alla lista dei Progetti Formativi</a>
+</div>

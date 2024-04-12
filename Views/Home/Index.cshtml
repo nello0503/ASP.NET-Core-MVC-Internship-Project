@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
+}
+
+<style>
+    body {
+        background-image: url(~/ASL_BackgroundHome.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh; /* Imposta l'altezza al 100% della viewport */
+        margin: 0;
+        display: flex;
+        flex-direction: column; /* Allineamento verticale */
+        justify-content: center; /* Centro verticale */
+        align-items: center; /* Centro orizzontale */
+        text-align: center; /* Allineamento del testo al centro */
+    }
+
+    img {
+        max-width: 100%; /* Assicura che l'immagine non superi la larghezza della finestra */
+    }
+</style>
+
+<body>
+    <h1 class="display-4 custom-heading">Benvenuto nel portale di creazione e gestione dei progetti formativi</h1>
+    <img src="~/ASL_BackgroundHome.jpg" />
+</body>

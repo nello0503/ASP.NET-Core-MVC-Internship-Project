@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html lang="it-it">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - ASL CASERTA</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Formazione.styles.css" asp-append-version="true" />
+
+    <style>
+        /* Stile per il navbar con sfondo blu arrotondato */
+        .navbar {
+            background-color: #007bff; /* Colore di sfondo blu */
+            border-radius: 10px; /* Border radius */
+            box-shadow: 0 10px 8px rgba(0, 0, 0, 0.2); /* Ombra */
+            padding: 10px 20px; /* Spaziatura interna (aggiustata per l'aspetto arrotondato) */
+            display: flex; /* Mostra il titolo e l'icona affiancati */
+            justify-content: center; /* Allinea al centro */
+            align-items: center; /* Allinea verticalmente al centro */
+        }
+
+        /* Stili per l'icona */
+        .navbar-imglogo {
+            width: 100px; /* Larghezza dell'icona */
+            height: auto; /* Altezza automatica per mantenere l'aspetto originale */
+        }
+
+        /* Stili per il titolo */
+        .navbar-brand {
+            color: #fff; /* Colore del testo */
+            font-size: 24px; /* Dimensione del carattere */
+            margin-left: 10px; /* Aggiunge uno spazio tra l'icona e il testo */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <!-- Icona e titolo affiancati nel navbar -->
+                <img src="~/Asl Logo.png" alt="Logo ASL CASERTA" class="navbar-imglogo" />
+                <a class="navbar-brand" @*asp-area="" asp-controller="Home" asp-action="Index" *@><b>SERVIZIO SPP GESTIONE PROGETTI FORMATIVI</b></a>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

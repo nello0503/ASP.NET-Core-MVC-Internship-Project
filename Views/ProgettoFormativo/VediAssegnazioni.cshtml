@@ -1,0 +1,427 @@
+﻿ 
+   
+
+@{
+    Layout = "_Layout";
+}
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@model Formazione.Models.CustomViewAssegnazione;
+
+<style>
+    .fieldset{
+
+    }
+</style>
+
+<script type="text/javascript">
+
+    function validateForm(event) {
+        event.preventDefault();
+        let msg = "";
+        if (document.addDipManuale.elements['UpSel'].value === '') {
+            msg = msg + "Selezionare l'unità produttiva\r\n";//alert(check_value(target) + " ddd" + target);
+        }
+        if (document.addDipManuale.elements['EdSel'].value === '') {
+            msg = msg + "Selezionare l'edizione\r\n";//alert(check_value(target) + " ddd" + target);
+        }
+
+        if (msg === "") 
+            event.target.submit();
+            else
+            alert(msg);
+
+
+        }
+
+
+
+    function ChangeUP(o) {
+        // Get the triggering element
+        // var element = event.srcElement;
+
+        alert(o.value);
+        document.getElementById("UpSel").value = o.value;
+       // document.addDipManuale.elements['UpSel'] =o.value;
+    }
+    function ChangeED(o) {
+        // Get the triggering element
+        // var element = event.srcElement;
+
+        alert("EdizioneID " + o.value);
+        document.getElementById("EdSel").value = o.value;
+
+    }
+
+
+
+   
+
+
+    function check_value(x) {
+
+        if (x === undefined) {
+            console.log('undefined');
+        }
+        else if (x === null) {
+            console.log('null ');
+        }
+        else {
+            console.log('neither undefined nor null');
+        }
+    }
+    </script>
+
+<div >
+
+
+    
+
+        <fieldset class="fieldset">
+            <legend>Filtri</legend>
+    <table>
+            <tr>
+                <th>
+                    Unita Produttiva
+                </th>
+                <th>
+                    Edizione
+
+                </th>
+                <th>
+                    Assegnati Edizione @TempData["edizione"]
+                </th>
+                </tr>
+                <tr>
+                    <td>  @Html.DropDownList("Unita", @Model.unita, "Seleziona Unita", new { onchange = "ChangeUP(this)",onload = "ChangeUP(this)"  })  </td>
+                    <td>   @Html.DropDownList("Edizione", @Model.numeroEdiz, "Seleziona Edizione", new { onchange = "ChangeED(this)",onload = "ChangeED(this)"  })   </td>
+                @{
+                    var totale = 0;
+                    var assegnati = 0;
+                    if(TempData["unita"] == null)
+                    {
+
+                        assegnati = Model.listaDiscenti.Where(m => m.Assegnato == true).Count();
+
+                        foreach(var p in Model.listaPianificazioni)
+                        {
+
+                            totale += p.NumeroAssegnato;
+
+                        }
+
+                        
+
+
+
+
+                    }
+                    else
+                    {
+
+                        assegnati = Model.listaDiscenti.Where(m => m.EdizioneCorsoID == (int)TempData["edizione"] && m.Assegnato == true).Count();
+
+
+                        totale = Model.listaPianificazioni.Where(m => m.EdizioneCorsoID == (int)TempData["edizione"] && m.UnitaProduttivaID == (int)TempData["unita"]).Select(m => m.NumeroAssegnato).FirstOrDefault();
+
+                       
+
+                    }
+
+                    <td>    @assegnati / @totale</td>
+
+
+
+
+                }
+
+                <td id="totaleCell"></td>
+                <td id="assegnatiCell"></td>
+                    
+                </tr>
+
+
+    
+  
+            </table>
+        </fieldset>
+    
+
+</div>
+
+
+
+<div>
+    <form asp-action="SalvaDiscente" asp-controller="ProgettoFormativo" id="addDipManuale" onsubmit="validateForm(event)" name="addDipManuale">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+        <h6></h6>
+        <fieldset>
+            <legend>Assegnazione Manuale</legend>
+       
+
+        <table>
+            <tr>
+                <td>
+                    <label class="control-label"> Matricola </label>
+                </td>
+                <td>
+                    <label class="control-label">Cognome</label>
+                </td>
+                <td>
+                    <label class="control-label"> Nome </label>
+                </td>
+
+                <td>
+                    <label class="control-label">CF </label>
+                </td>
+                <td>
+                    <label class="control-label">Luogo Nascita</label>
+                </td>
+  
+                <td>  <label class="control-label"> Data di nascita</label>
+                    </td>
+                <td>
+                    <label class="control-label"> Unita Operativa </label>
+                </td>
+                <td> <label  class="control-label"> Mansione </label>
+                    </td>
+                <td>
+                    </td>
+        </tr>
+        
+            <tr>
+                <td>
+                    <input asp-for="discente.Matricola" class="form-control" />
+                </td>
+
+                <input asp-for="discente.ProgettoFormativoID" type="hidden" value="@Model.progettoID"/>
+
+                <input asp-for="discente.EdizioneCorsoID" type="hidden" id="EdSel" value=""/>
+
+                <input asp-for="discente.UnitaProduttiva" type="hidden" id="UpSel" value=""/>
+
+                <td>
+                    <input asp-for="discente.cognome" class="form-control" />
+                </td>
+
+
+                <td> <input asp-for="discente.nome" class="form-control" />
+
+                </td>
+
+                <td>
+                    <input asp-for="discente.cf" class="form-control" style="text-transform:uppercase;" />
+                </td>
+                <td>
+                    <input asp-for="discente.luogo_di_nascita" class="form-control" />
+                </td>
+                <td>
+                    <input asp-for="discente.data_di_nascita" class="form-control" />
+                </td>
+
+                <td>
+                    <input asp-for="discente.unita_operativa" class="form-control" />
+                </td>
+                <td>
+                    <input asp-for="discente.qualifica" class="form-control" />
+                </td>             
+                
+                 
+                <td>
+                    <input type="submit" value="Assegna" class="btn btn-primary"  />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <span asp-validation-for="discente.Matricola" class="text-danger"></span>
+                </td>
+
+                <td>
+                    <span asp-validation-for="discente.cognome" class="text-danger"></span>
+                </td>
+
+
+                <td>
+                    <span asp-validation-for="discente.nome" class="text-danger"></span>
+
+                </td>
+
+                <td>
+                    <span asp-validation-for="discente.cf" class="text-danger"></span>
+                </td>
+                <td>
+                    <span asp-validation-for="discente.luogo_di_nascita" class="text-danger"></span>
+                </td>
+                <td>
+                    <span asp-validation-for="discente.data_di_nascita" class="text-danger"></span>
+                </td>
+
+                <td>
+                    <span asp-validation-for="discente.unita_operativa" class="text-danger"></span>
+                </td>
+                <td>
+                    <span asp-validation-for="discente.qualifica" class="text-danger"></span>
+                </td>
+
+
+                <td>
+                     <span asp-validation-for="discente.UnitaProduttiva" class="text-danger"/>
+                        <span asp-validation-for="discente.EdizioneCorsoID" class="text-danger"/>
+                    
+                </td>
+            </tr>
+        </table>
+
+        </fieldset>
+ </form>
+
+</div>
+
+<fieldset>
+    <legend>Lista Dipendenti </legend>
+<div class="tab-content border-top-10">
+    <div class="tab-pane container active p-0">
+        
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark text-black">
+
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+                        Unita Produttiva
+                    </th>
+                   
+                    <th>
+                        Edizione
+
+                    </th>
+
+                   
+
+                    <th>
+                        Dati Anagrafici
+
+                    </th>
+                    <th>
+                        Cod. Fiscale
+                    </th>
+                    <th>
+                        Luogo di nascita
+                    </th>
+                    <th>
+                        Data di nascita
+
+                    </th>
+
+                    <th>
+                        Unità Operativa
+                    </th>
+                    <th>
+                        Mansione
+                    </th>
+
+                    <th>
+                        Data Assegnazione
+                    </th>
+                    <th>
+                        Utente Assegnazione
+                    </th>
+                    <th>
+                        Azioni
+                    </th>
+
+                </tr>
+                </thead>
+
+
+            <tbody>
+
+                @foreach(var discente in Model.listaDiscenti){
+
+                    
+
+
+                <tr>
+                    <form id="formAssegna - @discente.DiscenteID" method="post" asp-action="Assegna" asp-controller="ProgettoFormativo" asp-route-id=" @discente.DiscenteID">
+
+                    <td>
+
+                        <input type="checkbox" value="@discente.Assegnato" onclick="document.getElementById('formAssegna - @discente.DiscenteID').submit()" checked="@discente.Assegnato" />
+
+
+                    </td>
+
+
+                    <td>
+                        @Html.DisplayFor(m => discente.UnitaProduttiva)
+                    </td>
+                    
+
+                    <td>
+                        @Html.DisplayFor(m => discente.EdizioneCorsoID)
+                    </td>
+
+                  
+
+                    <td>
+                        @Html.DisplayFor(m => discente.nome) @Html.DisplayFor(m => discente.cognome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => discente.cf)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(m => discente.luogo_di_nascita)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => discente.data_di_nascita)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => discente.unita_operativa)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => discente.mansione)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(m => discente.DataAssegnato)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => discente.UtenteAss)
+                    </td>
+
+                    <td>
+                        <a asp-action="DeleteDip" asp-controller="ProgettoFormativo" asp-route-id="@discente.DiscenteID" onclick="return confirm('Sicuro?');"><i class="fa-regular fa-trash-can" style="color: #ff2600;" title="Elimina"></i></a>
+
+
+
+                    </td>
+
+                    </form>
+
+                </tr>
+                }
+                   
+
+
+
+
+
+            </tbody>
+         </table>
+         
+       </div>
+</div>
+</fieldset>
+
+

@@ -1,0 +1,131 @@
+﻿
+
+
+@inject IHttpContextAccessor Accessor
+ 
+ @model Formazione.Models.CustomViewProgEdiz
+
+@{
+
+    Layout = "_Layout";
+    var idd = Model.listaProgetti.First().ProgettoFormativoID;
+}
+
+<script src="https://kit.fontawesome.com/c64299cedb.js" crossorigin="anonymous"></script>
+
+<div class="tab-content">
+    <div class="tab-pane container active p-0" id="home">
+        <h5 class="text-uppercase p-2 text-center">Progetto</h5>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark text-black">
+                <tr>
+                    @foreach(var item in Model.listaProgetti)
+                    {
+                        <th>@Html.DisplayNameFor(m => item.Codice)</th>
+                        <th>@Html.DisplayNameFor(m => item.titolo)</th>
+                        <th>@Html.DisplayNameFor(m => item.direttore_scientifico)</th>
+                        <th>@Html.DisplayNameFor(m => item.tipologia_evento)</th>
+                        <th>@Html.DisplayNameFor(m => item.numero_partecipanti)</th>
+                        <th>@Html.DisplayNameFor(m => item.NumeroEdizioni)</th>
+                        <th>Ed. Mancanti</th>
+
+                    }
+
+                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.listaProgetti)
+                {
+                    <tr>
+                        <td>@item.Codice</td>
+                        <td>@item.titolo</td>
+                        <td>@item.direttore_scientifico</td>
+                        <td>@item.tipologia_evento</td>
+                        <td>@item.numero_partecipanti</td>
+                        <td>@Model.listaEdizioni.Count()/@Model.CalcolaEdizioniCorso(@item.numero_partecipanti,35)</td>
+                        <td>
+
+                            @Model.CalcolaEdizioniCorsoMancanti(@item.numero_partecipanti,@Model.listaEdizioni.Count(),35)
+                            
+                            </td>
+
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+    <div>
+        
+    <div>  <h5 class="text-uppercase ">Edizioni <a asp-action="Create" asp-controller="EdizioneCorsoes" asp-route-id="@idd"> <i class=" fa-solid fa-plus" style="color:#000000"></i> </a> </h5>  </div>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark text-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(m => Model.listaEdizioni.FirstOrDefault().EdizioneCorsoID)</th>
+                    <th>@Html.DisplayNameFor(m => Model.listaEdizioni.FirstOrDefault().NumeroEdizione)</th>
+                    <th>@Html.DisplayNameFor(m => Model.listaEdizioni.FirstOrDefault().Anno)</th>
+                    <th>@Html.DisplayNameFor(m => Model.listaEdizioni.FirstOrDefault().Descrizione)</th>
+                    <th>@Html.DisplayNameFor(m => Model.listaEdizioni.FirstOrDefault().QuantitàModuli)</th>
+                @if (Model.listaModuli != null && Model.listaModuli.Count()>0){ 
+                @for (int i = 1; i<=@Model.listaEdizioni.Max(x => x.QuantitàModuli); i++)
+                {
+                    <th>Modulo @i</th>
+                    
+
+                    }
+                }
+                else
+                {
+                 <th> Moduli </th>   
+                }
+
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.listaEdizioni)
+                {
+                    <tr>
+                    <td>@item.EdizioneCorsoID</td>
+                    <td>@item.NumeroEdizione</td>
+                    <td>@item.Anno</td>
+                    <td>@item.Descrizione</td>                  
+                    <td>@item.QuantitàModuli</td>
+                    
+                    
+                    @if (Model.listaModuli != null && Model.listaModuli.Count() >0)
+                    {
+                        @for (int i = 1; i <=  @Model.listaEdizioni.Max(x => x.QuantitàModuli)  ; i++)
+                        {
+
+                            var moduliEd = @Model.listaModuli.Where(x => x.EdizioneCorsoID == item.EdizioneCorsoID && x.numero == i && x.eliminato == 0);
+                            if (moduliEd != null && moduliEd.Count() > 0)
+                            {
+                                <td>                        
+                                    <b>@moduliEd.FirstOrDefault().data_inizio.ToShortDateString()</b><br>
+                                    <i>@moduliEd.FirstOrDefault().data_inizio.ToShortTimeString() - @moduliEd.FirstOrDefault().data_fine.ToShortTimeString()</i>
+
+
+                                </td>
+
+                            }
+                            else
+                            {
+                                <td> <a asp-action="Create" asp-controller="Modulo" asp-route-id="@item.EdizioneCorsoID"> <i class=" fa-solid fa-plus" style="color:#000000"></i> </a>  </td>
+                            }
+                        }
+                    } else 
+                    {
+                        <td> <a asp-action="Create" asp-controller="Modulo" asp-route-id="@item.EdizioneCorsoID"> <i class=" fa-solid fa-plus" style="color:#000000"></i> </a> </td>
+                    }
+                    </tr>
+                }
+            </tbody>
+        </table>
+   
+</div>
+
+
+
+    

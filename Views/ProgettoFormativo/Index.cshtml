@@ -1,0 +1,579 @@
+﻿@addTagHelper*, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Formazione.Models
+@model IEnumerable<Formazione.Models.ProgettoFormativo>
+
+@{
+    ViewData["Title"] = "Lista Progetti Formativi";
+    Layout = "_Layout";
+}
+
+
+
+<h1 class="Titolo">Lista Progetti Formativi</h1>
+<h3 class="Titolo3">
+    Aggiungi un nuovo progetto formativo
+    <a asp-action="Create" id="NuovoProgetto">
+        <i class="fa-regular fa-plus fa-beat fa-xl" style="color: #32CD32"></i>
+    </a>
+</h3>
+
+<head>
+    <script>function myFunction1() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchID");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+
+    <script>function myFunction2() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("Corso");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1)
+                        tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+            }</script>
+
+    <script>function myFunction3() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("Codice");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+
+    <script>function myFunction4() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("Titolo");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[3];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+
+    <script>function myFunction5() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("direttScientifico");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[4];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+
+    <script>function myFunction6() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("tipEvento");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[5];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+
+    <script>function myFunction7() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("Tutor");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[6];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+
+    <script>function myFunction8() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("tutorAula");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[7];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+
+    <script>function myFunction9() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("Ore");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[8];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+
+    <script>function myFunction10() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("numPart");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[9];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+    <script>function myFunction11() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("sede");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[10];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }</script>
+</head>
+
+<style>
+
+    .action-button-container {
+        display: flex;
+        flex-direction: row; /* Display buttons in a horizontal row */
+        align-items: center; /* Vertically align buttons */
+    }
+
+    .action-button {
+        padding: 0;
+        border: none;
+        background: none;
+        font-size: 24px;
+        color: #000000;
+        margin-right: 10px; /* Add spacing between buttons */
+        cursor: pointer;
+    }
+
+    .Titolo {
+        font-family: serif;
+        text-shadow: 1px 1px black;
+    }
+
+    .table td, .table th {
+        padding: 2px;
+    }
+
+    #NuovoProgetto {
+        border-block: 30px;
+        text-decoration: none;
+        color: black;
+    }
+
+    .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown-content a {
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    #Id {
+        text-decoration: none;
+        color: black;
+    }
+
+    .container {
+        position: relative;
+        width: 100%;
+    }
+
+    .float-right {
+        float: right;
+        padding-bottom: 100px;
+    }
+
+    .button {
+        padding: 15px 25px;
+        font-size: 24px;
+        text-align: center;
+        cursor: pointer;
+        outline: none;
+        color: blue;
+        background-color: #04AA6D;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px #999;
+        margin-top: 100px;
+    }
+
+    .button:hover {
+        background-color: #3e8e41;
+    }
+
+
+
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+
+    #direttore_scientifico {
+        text-decoration: none;
+        color: black;
+    }
+
+    .filter-input {
+        width: 100%; /* Riempi tutto lo spazio disponibile */
+        padding: 5px; /* Aggiungi spazio tra l'input e il bordo */
+        margin: 5px 0; /* Aggiungi spazio verticale tra i filtri */
+    }
+
+    .button-container {
+        display: flex;
+        align-items: center;
+    }
+
+    .applica-filtro {
+        background-color: lightgreen;
+        border-radius: 15px;
+    }
+
+    .reset-filtro {
+        background-color: red;
+        border-radius: 15px;
+    }
+
+    .dropbtn-filtro {
+        background-color: lightblue;
+        border-radius: 15px;
+    }
+
+    .applica-filtro,
+    .reset-filtro, .dropbtn-filtro {
+        margin-left: 10px;
+    }
+
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+</style>
+<div class="container">
+    <div class="button-container">
+        <form asp-action="Index" asp-controller="ProgettoFormativo" method="get">
+            <label for="fromDate">Data Inizio:</label>
+            <input type="date" id="fromDate" name="fromDate" value="@ViewBag.fromDate">
+            <label for="toDate">Data Fine:</label>
+            <input type="date" id="toDate" name="toDate" value="@ViewBag.toDate">
+            <input type="submit" value="Applica filtro" class="applica-filtro">
+            <input type="submit" value="Reset Filtro" value="@ViewBag.Index" class="reset-filtro">
+        </form>
+        <div class="dropdown">
+            <button class="dropbtn-filtro">Stato</button>
+            <div class="dropdown-content">
+                <a asp-action="Index" asp-route-filter="InCorso">In Corso</a>
+                <a asp-action="Index" asp-route-filter="NonInCorso">Non In Corso</a>
+                <a asp-action="Index" asp-route-filter="SenzaEdizioni">Senza Edizioni</a>
+                <a asp-action="Index" asp-route-filter="Tutti">Tutti</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<form asp-action="Index" asp-controller="ProgettoFormativo" method="post">
+
+    <div class="container text-center">
+        <table class="table table-bordered table-striped" id="pagination" style="max-width:100%">
+            <thead class="thead-dark text-black">
+                <tr>
+
+                    <th>
+                        <a asp-action="Index" asp-route-OrderBy="ID_desc" data-sortable="true" id="Id">ID</a>
+                    </th>
+
+                    <th>
+                        Tipo Corso
+                    </th>
+                    <th>
+                        Codice
+                    </th>
+                    <th>
+                        Titolo
+                    </th>
+                    <th>
+                        <a asp-action="Index" asp-route-OrderBy="direttore_scientifico" id="direttore_scientifico">Direttore Scientifico</a>
+                    </th>
+                    <th>
+                        Tipologia evento
+                    </th>
+                    <th>
+                        Tutor
+                    </th>
+                    <th>
+                        Tutor Aula
+                    </th>
+                    <th>
+                        Ore edizione
+                    </th>
+                    <th>
+                        Numero Partecipanti
+                    </th>
+                    <th>
+                        Sede svolgimento
+                    </th>
+                    <th>
+                        Azioni
+                    </th>
+                </tr>
+
+                <tr>
+                    <th>
+                        <input type="text" id="searchID" class="filter-input" placeholder="Cerca ID" onkeyup="myFunction1()">
+
+                    </th>
+
+                    <th>
+                        <input type="text" id="Corso" class="filter-input" placeholder="Cerca Tipologia Corso" onkeyup="myFunction2()">
+
+                    </th>
+
+                    <th>
+                        <input type="text" id="Codice" class="filter-input" placeholder="Cerca Codice" onkeyup="myFunction3 ()">
+
+                    </th>
+
+                    <th>
+                        <input type="text" id="Titolo" class="filter-input" placeholder="Cerca Titolo" onkeyup="myFunction4()">
+
+                    </th>
+
+                    <th>
+                        <input type="text" id="direttScientifico" class="filter-input" placeholder="Cerca Direttore Scientifico" onkeyup="myFunction5()">
+
+                    </th>
+                    <th>
+                        <input type="text" id="tipEvento" class="filter-input" placeholder="Cerca Tipologia Evento" onkeyup="myFunction6()">
+
+                    </th>
+                    <th>
+                        <input type="text" id="Tutor" class="filter-input" placeholder="Cerca Tutor" onkeyup="myFunction7()">
+
+                    </th>
+                    <th>
+                        <input type="text" id="tutorAula" class="filter-input" placeholder="Cerca Tutor Aula" onkeyup="myFunction8()">
+
+                    </th>
+
+                    <th>
+                        <input type="text" id="Ore" class="filter-input" placeholder="Cerca Ore" onkeyup="myFunction9()">
+
+                    </th>
+
+                    <th>
+                        <input type="text" id="numPart" class="filter-input" placeholder="Cerca Numero Partecipanti" onkeyup="myFunction10()">
+
+                    </th>
+
+                    <th>
+                        <input type="text" id="sede" class="filter-input" placeholder="Cerca Sede Svolgimento" onkeyup="myFunction11()">
+
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody id="myTable">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ProgettoFormativoID)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TipoCorso.DescrizioneCodice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Codice)
+
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.titolo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.direttore_scientifico)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tipologia_evento)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tutor)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.tutor_aula)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ore_edizione)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.numero_partecipanti)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.sede_svolgimento)
+                        </td>
+                        <td>
+                            <div class="action-button-container">
+
+                                <a asp-action="Edit" asp-route-id="@item.ProgettoFormativoID" class="action-button"><i class="fa-regular fa-pen-to-square" style="color: #0433ff;" title="Modifica"></i></a>
+                                <a asp-action="Details" asp-route-id="@item.ProgettoFormativoID" class="action-button"><i class="fa-regular fa-circle-info" style="color: #96d35f;" title="Dettagli"></i></a>
+                                <a asp-action="Delete" asp-route-id="@item.ProgettoFormativoID" class="action-button"><i class="fa-regular fa-trash-can" style="color: #ff2600;" title="Elimina"></i></a>
+                                <a asp-action="VediEdizioni" asp-route-id="@item.ProgettoFormativoID" class=" action-button"><i class="fa-sharp fa-regular fa-magnifying-glass" style="color: #000000;" title="Vedi Edizioni"></i></a>
+                                <a asp-action="VediPianificazione" asp-route-id="@item.ProgettoFormativoID" class="action-button"><i class="fa-regular fa-calendar" style="color: #000000;" title="Vedi pianificazione"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+</form>
+
+

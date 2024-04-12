@@ -1,0 +1,55 @@
+﻿@model Formazione.Models.EdizioneCorso
+
+@{
+    ViewData["Title"] = "Creazione Edizione Corso";
+    Layout = "_Layout";
+
+}
+
+<h1>Creazione</h1>
+
+<h4>Edizione Corso</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProgettoFormativoID" class="control-label"></label>
+                <select asp-for="ProgettoFormativoID" class="form-control" asp-items="ViewBag.ProgettoFormativoID"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Anno" class="control-label"></label>
+                <input asp-for="Anno" class="form-control" />
+                <span asp-validation-for="Anno" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroEdizione" class="control-label"></label>
+                <input asp-for="NumeroEdizione" class="form-control" />
+                <span asp-validation-for="NumeroEdizione" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuantitàModuli" class="control-label"></label>
+                <input asp-for="QuantitàModuli" class="form-control" />
+                <span asp-validation-for="QuantitàModuli" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descrizione" class="control-label"></label>
+                <input asp-for="Descrizione" class="form-control" />
+                <span asp-validation-for="Descrizione" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <input type="submit" value="Salva" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="form-group mt-3">
+<a asp-action="Index" class="btn btn-secondary" style="background-color: red;">Ritorna alla lista delle edizioni</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

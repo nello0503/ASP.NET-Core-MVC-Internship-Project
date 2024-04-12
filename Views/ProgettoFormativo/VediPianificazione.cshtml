@@ -1,0 +1,281 @@
+﻿
+
+
+
+@{
+
+    Layout = "_Layout";
+}
+
+
+
+@model Formazione.Models.CustomViewPianificazioneProg
+
+<script type="text/javascript">
+        function setValues()
+        {
+            document.getElementById('dest').value=document.getElementById('src').value;
+        }
+    function AggiornaTotaliLabel(nameLabelUPD)
+    {
+        //alert("assssss");
+        //if (obj.value!="")
+        //{
+          //  obj.value = obj.value.toUpperCase();
+        //}
+        //txtPianiCod26_1 nome textBox
+        //txtCodUP25
+
+        //txtCodED1
+        // alert(nameLabelUPD);        
+        //alert(nameLabelUPD);
+        //nameLabelUPD = nameLabelUPD.replace("txtPianiCod","");
+        var nums = nameLabelUPD.replace("txtCodUP","").replace("txtPianiCod","").split("_");
+        var idUnitaProduttiva= nums[0];
+        var idEdizione=nums[1];
+
+        var lblUnitaProduttiva="txtCodUP" + nums[0];
+        var lblEdizione="txtCodED"+nums[1];
+   
+        //alert(lblUnitaProduttiva + " "+ lblEdizione);
+        //document.getElementById(lblUnitaProduttiva).innerText = 99999;
+        //**********Aggiornare AggiornaTotaliLabel totali Riga txtCod[idunita]
+        //alert(document.getElementByid("txtCodUP25").value);
+
+        //**********Aggiornare AggiornaTotaliLabel totali Colonna txtEd[idEdizione]
+        //alert(nums[1]);
+        //document.getElementById(nameLabelUPD).value='new value';
+        
+        var ListaUP = document.getElementById("listaUnita").value.split(",");
+        var ListaEdizioni = document.getElementById("listaEdizioni").value.split(",");
+
+
+        //alert(document.getElementById("listaUnita").value);
+        //txtPianiCod26_1
+        var  totaliEd  =0;
+        let i = 0;
+        while (i < ListaUP.length)
+        {
+        
+            var txt =  "txtPianiCod"+ListaUP[i] +"_"+idEdizione ; 
+           // alert(txt);
+            totaliEd = totaliEd + parseInt(document.getElementById(txt).value);
+            i++;
+
+        }
+        //alert('Totale Edizione ' + totaliEd);
+        document.getElementById( lblEdizione ).innerText = totaliEd;
+
+
+        var totaliUP =0;
+        i = 0;
+        while (i < ListaEdizioni.length)
+        {
+        
+            var txt =  "txtPianiCod"+idUnitaProduttiva +"_"+ListaEdizioni[i] ; 
+            //alert(txt);
+            totaliUP = totaliUP + parseInt(document.getElementById(txt).value);
+            i++;
+
+        }
+        //alert('Totale UP ' + totaliUP);
+        document.getElementById(lblUnitaProduttiva).innerText = totaliUP;
+
+    }
+</script>
+
+
+<head>
+
+</head>
+
+
+
+
+<div class="tab-content">
+    <div class="tab-pane container active p-0" id="home">
+        <h5 class="text-uppercase p-2 text-center">Progetto</h5>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark text-black">
+                <tr>
+
+                        <th>@Html.DisplayNameFor(m => Model.Codice)</th>
+                        <th>@Html.DisplayNameFor(m => Model.titolo)</th>
+                        <th>@Html.DisplayNameFor(m => Model.direttore_scientifico)</th>
+                        <th>@Html.DisplayNameFor(m => Model.tipologia_evento)</th>
+                        <th>@Html.DisplayNameFor(m => Model.numero_partecipanti)</th>
+                        <th>Vedi Assegnazioni</th>
+
+                         @Html.HiddenFor(model => model.ProgettoFormativoID)
+
+
+
+
+                </tr>
+            </thead>
+            <tbody>
+
+                    <tr>
+                        <td>@Model.Codice</td>
+                        <td>@Model.titolo</td>
+                        <td>@Model.direttore_scientifico</td>
+                        <td>@Model.tipologia_evento</td>
+                        <td>@Model.numero_partecipanti</td>
+                        <td> <a asp-action="VediAssegnazioni" asp-controller="ProgettoFormativo" asp-route-id="@Model.ProgettoFormativoID"><i class="fa-regular fa-newspaper" style="color: #aaaaaa;" title="Vedi Assegnazioni"></i></a></td>
+
+
+
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="tab-content">
+    <div class="tab-pane container active p-0" id="home">
+        <h5 class="text-uppercase p-2 text-center">Edizioni</h5>
+        @*using (Html.BeginForm("SalvaPianificazione", "ProgettoFormativo", FormMethod.Post)){*@
+        <form asp-action="SalvaPianificazione">
+             <input type="hidden" id="listaUnita" value="@String.Join(",",  Model.UnitaProduttive.Select(m => m.UnitaProduttivaID.ToString()))" />
+             <input type="hidden" id="listaEdizioni" value="@String.Join(",",  Model.EdizioniProgetto.Select(m => m.EdizioneCorsoID.ToString()))" />
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark text-black">
+
+                    <tr>
+
+
+                        <th> unita</th>
+                        @if (Model.EdizioniProgetto.Count() > 0)
+                        {
+
+
+                            @foreach (var edizione in Model.EdizioniProgetto)
+                            {
+
+
+
+                                <th>ED  @Html.DisplayFor(m => edizione.NumeroEdizione)   </th>
+
+                            }
+                              <th>Totale</th>
+
+                        }
+                        else
+                        {
+
+                            <th> Aggiungi Edizione <a asp-action="Create" asp-controller="EdizioneCorsoes" asp-route-id="@Model.ProgettoFormativoID"> <i class=" fa-solid fa-plus"></i> </a>  </th>
+                        }
+
+                      
+
+                        
+
+
+
+                    </tr>
+
+                        
+
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.UnitaProduttive)
+
+                    {
+                        <tr>
+                            <td title="@item.Descrizione">@Html.DisplayFor(m => item.Codice)</td>
+
+                            @{
+
+                                int numCodAssegnate = 0;
+                                string txtTotUP = "txtCodUP"+item.UnitaProduttivaID.ToString();
+                            }
+
+                            @foreach (var edizione in Model.EdizioniProgetto)
+                            {
+                                @for (int i = 0; i < Model.PianificazioneProgetto.Count(); i++)
+                                {
+                                    if (Model.PianificazioneProgetto[i].UnitaProduttivaID == item.UnitaProduttivaID && Model.PianificazioneProgetto[i].EdizioneCorsoID == edizione.EdizioneCorsoID )
+                                    {
+                                        <td>
+                                    <div class="col-md-12">
+                                        @{
+                                         numCodAssegnate += Model.PianificazioneProgetto[i].NumeroAssegnato;   
+                                          string txtPianUPED = "txtPianiCod"+item.UnitaProduttivaID.ToString()+"_"+edizione.EdizioneCorsoID.ToString();
+                                        }
+                                        @Html.TextBoxFor(model => model.PianificazioneProgetto[i].NumeroAssegnato, "", new {@id=txtPianUPED,name="UP"+item.UnitaProduttivaID, @required = "required",@type = "number", @class = "form-control", onkeyup="AggiornaTotaliLabel('"+@txtPianUPED+"')"})
+                                        @Html.HiddenFor(model => model.PianificazioneProgetto[i].PianificazioneID)
+                                        @Html.HiddenFor(model => model.PianificazioneProgetto[i].EdizioneCorsoID)
+                                        @Html.HiddenFor(model => model.PianificazioneProgetto[i].UnitaProduttivaID)
+                                        @Html.HiddenFor(model => model.PianificazioneProgetto[i].ProgettoFormativoID)
+                                    </div>
+                                     </td>
+                                    }
+                                }
+
+
+
+                            }
+                     <td> <label  id=@txtTotUP name="@txtTotUP">@numCodAssegnate</label></td>
+
+                   </tr>
+
+                    }
+
+                        <tr>
+
+
+                        <td> Totali</td>
+                        @{
+                          int numCodAssegnateTotale = 0;
+                        }
+                        @foreach (var edizione in Model.EdizioniProgetto)
+                        {
+                            
+                           
+
+                            int numCodAssegnate = 0;
+                            string txtTotEd = "txtCodED"+edizione.EdizioneCorsoID.ToString();
+                           
+
+                            @for (int i = 0; i < Model.PianificazioneProgetto.Count(); i++)
+                                {
+                                    if (Model.PianificazioneProgetto[i].EdizioneCorsoID == edizione.EdizioneCorsoID )
+                                    {
+
+                                          numCodAssegnate += Model.PianificazioneProgetto[i].NumeroAssegnato;  
+                                          numCodAssegnateTotale += Model.PianificazioneProgetto[i].NumeroAssegnato;  
+                                    }
+                                }
+
+                           // @Html.Label()
+
+                            //@Html.Label(d => item.Value, new { @class = "control-label" })      <label  id="txtTotEd"@edizione.EdizioneCorsoID  name="txtTotEd"@edizione.EdizioneCorsoID>0</label>
+                            <td> 
+                                <label  id=@txtTotEd name="@txtTotEd">@numCodAssegnate</label>
+                                                           
+                           </td>
+
+                        }
+                        <td> <label  id="txtTotali" name="txtTotali">@numCodAssegnateTotale</label></td>
+
+                       </tr>
+
+                </tbody>
+            </table>
+
+
+            <div class="form-group">
+                <input type="submit" value="Salva" class="btn btn-primary" />
+            </div>
+     </Form>
+    </div>
+
+</div>
+
+
+
+
+
+
+
